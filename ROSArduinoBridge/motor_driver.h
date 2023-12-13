@@ -11,6 +11,15 @@
   #define LEFT_MOTOR_ENABLE 13
 #endif
 
+#ifdef CYTRON
+  #define TOOL_MOTOR 3
+  #define RIGHT_MOTOR 5
+  #define LEFT_MOTOR 6
+  #define TOOL_MOTOR_DIR 2
+  #define RIGHT_MOTOR_DIR 4
+  #define LEFT_MOTOR_DIR 7
+#endif
+
 void initMotorController();
 void setMotorSpeed(int i, int spd);
 void setMotorSpeeds(int leftSpeed, int rightSpeed);
