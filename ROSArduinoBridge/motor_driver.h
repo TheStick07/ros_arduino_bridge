@@ -11,13 +11,15 @@
   #define LEFT_MOTOR_ENABLE 13
 #endif
 
-#ifdef CYTRON
+#ifdef CYTRON_MOTOR_DRIVER
+  //below must be PWM-Pins (ARduino NANO: Pins-3,5,6,9,10,11)
   #define TOOL_MOTOR 3
   #define RIGHT_MOTOR 5
   #define LEFT_MOTOR 6
-  #define TOOL_MOTOR_DIR 2
-  #define RIGHT_MOTOR_DIR 4
-  #define LEFT_MOTOR_DIR 7
+  //below doesn't matter what Pins are used
+  #define TOOL_MOTOR_DIR 7
+  #define RIGHT_MOTOR_DIR 8
+  #define LEFT_MOTOR_DIR 9
 #endif
 
 void initMotorController();
