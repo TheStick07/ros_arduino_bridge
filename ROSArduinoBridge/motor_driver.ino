@@ -87,6 +87,7 @@
     setMotorSpeed(RIGHT, rightSpeed);
   }
 #elif defined CYTRON_MOTOR_DRIVER
+  #warning CYTRON_MOTOR_DRIVER used!
   void initMotorController(){
     digitalWrite(TOOL_MOTOR, LOW);
     digitalWrite(RIGHT_MOTOR, LOW);
