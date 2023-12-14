@@ -86,6 +86,40 @@
     setMotorSpeed(LEFT, leftSpeed);
     setMotorSpeed(RIGHT, rightSpeed);
   }
+#elif defined CYTRON_MOTOR_DRIVER
+  void initMotorController(){
+    digitalWrite(TOOL_MOTOR, LOW);
+    digitalWrite(RIGHT_MOTOR, LOW);
+    digitalWrite(LEFT_MOTOR, LOW);
+  }
+
+  void setMotorSpeed(int i, int spd) {
+    unsigned char reverse = 0;
+  
+    if (spd < 0)
+    {
+      spd = -spd;
+      reverse = 1;
+    }
+    if (spd > 255)
+      spd = 255;
+    
+    if (i == LEFT) { 
+      if      (reverse == 0) { analogWrite(LEFT_MOTOR, spd); digitalWrite(LEFT_MOTOR_DIR, LOW); }
+      else if (reverse == 1) { analogWrite(LEFT_MOTOR, spd); digitalWrite(LEFT_MOTOR_DIR, HIGH); }
+    }
+    else /*if (i == RIGHT) //no need for condition*/ {
+      if      (reverse == 0) { analogWrite(RIGHT_MOTOR, spd); digitalWrite(RIGHT_MOTOR, LOW); }
+      else if (reverse == 1) { analogWrite(RIGHT_MOTOR, spd); digitalWrite(RIGHT_MOTOR, HIGH); }
+    }
+  }
+
+  void setMotorSpeeds(int leftSpeed, int rightSpeed) {
+    setMotorSpeed(LEFT, leftSpeed);
+    setMotorSpeed(RIGHT, rightSpeed);
+  }
+
+
 #else
   #error A motor driver must be selected!
 #endif

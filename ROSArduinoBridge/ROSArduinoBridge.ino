@@ -66,7 +66,7 @@
    //#define L298_MOTOR_DRIVER
 
    /* Cytron Motor driver*/
-   #define CYTRON
+   #define CYTRON_MOTOR_DRIVER
 #endif
 
 //#define USE_SERVOS  // Enable use of PWM servos as defined in servos.h
