@@ -30,7 +30,7 @@
 #elif defined(ARDUINO_ENC_COUNTER)
   volatile long left_enc_pos = 0L;
   volatile long right_enc_pos = 0L;
-  static const int8_t ENC_STATES [] = {0,1,-1,0,-1,0,0,1,1,0,0,-1,0,-1,1,0};  //encoder lookup table
+  static const int8_t ENC_STATES [] = {0, 1, -1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, -1, 1, 0};  //encoder lookup table
     
   /* Interrupt routine for LEFT encoder, taking care of actual counting */
   ISR (PCINT2_vect){
@@ -79,4 +79,3 @@ void resetEncoders() {
 }
 
 #endif
-
