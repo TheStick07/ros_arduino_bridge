@@ -117,7 +117,7 @@
 
   /* Stop the robot if it hasn't received a movement command
    in this number of milliseconds */
-  #define AUTO_STOP_INTERVAL 2000
+  #define AUTO_STOP_INTERVAL 10000
   long lastMotorCommand = AUTO_STOP_INTERVAL;
 #endif
 
@@ -204,7 +204,7 @@ int runCommand() {
     Serial.print(" ");
     Serial.println(readEncoder(RIGHT));
     break;
-   case RESET_ENCODERS:
+  case RESET_ENCODERS:
     resetEncoders();
     resetPID();
     Serial.println("OK");
@@ -358,4 +358,3 @@ void loop() {
   }
 #endif
 }
-
