@@ -60,7 +60,10 @@
    //#define ROBOGAIA
    
    /* Encoders directly attached to Arduino board */
-   #define ARDUINO_ENC_COUNTER
+   //#define ARDUINO_ENC_COUNTER
+
+   /* Encoders directly attached to Arduino board using MD_REncoder Library https://github.com/MajicDesigns/MD_REncoder/tree/main*/
+   #define USE_MD_REncoder_LIB
 
    /* L298 Motor driver*/
    //#define L298_MOTOR_DRIVER
@@ -103,6 +106,11 @@
   /* Encoder driver function definitions */
   #include "encoder_driver.h"
 
+  /* Encoder lib*/
+  #ifdef USE_MD_REncoder_LIB
+    #include "MD_REncoder.h"
+  #endif
+
   /* PID parameters and functions */
   #include "diff_controller.h"
 
@@ -140,6 +148,12 @@ char argv2[16];
 // The arguments converted to integers
 long arg1;
 long arg2;
+
+#ifdef USE_MD_REncoder_LIB
+  // set up encoder object
+  MD_REncoder leftMotorEncoder = MD_REncoder(LEFT_ENC_PIN_A, LEFT_ENC_PIN_B);
+  MD_REncoder rightMotorEncoder = MD_REncoder(RIGHT_ENC_PIN_A, RIGHT_ENC_PIN_B);
+#endif
 
 /* Clear the current command parameters */
 void resetCommand() {
@@ -274,6 +288,10 @@ void setup() {
     
     // enable PCINT1 and PCINT2 interrupt in the general interrupt mask
     PCICR |= (1 << PCIE1) | (1 << PCIE2);
+  #elif defined(USE_MD_REncoder_LIB)
+    // set up encoder object
+    leftMotorEncoder.begin();
+    rightMotorEncoder.begin();
   #endif
   initMotorController();
   resetPID();

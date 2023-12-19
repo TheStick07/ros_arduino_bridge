@@ -68,6 +68,20 @@
       return;
     }
   }
+#elif defined(USE_MD_REncoder_LIB)
+  /* Wrap the encoder reading function */
+  long readEncoder(int i) {
+    if (i == LEFT) return leftMotorEncoder.getCount();
+    else return rightMotorEncoder.getCount();
+  }
+  /* Wrap the encoder reset function */
+  void resetEncoder(int i) {
+    if (i == LEFT){
+      leftMotorEncoder.resetCount();
+    } else { 
+      rightMotorEncoder.resetCount();
+    }
+  }
 #else
   #error A encoder driver must be selected!
 #endif
