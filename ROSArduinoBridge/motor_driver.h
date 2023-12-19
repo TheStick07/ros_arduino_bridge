@@ -17,8 +17,8 @@
   #define RIGHT_MOTOR 5
   #define LEFT_MOTOR 6
   //below doesn't matter what Pins are used
-  #define TOOL_MOTOR_DIR 7
-  #define RIGHT_MOTOR_DIR 8
+  #define TOOL_MOTOR_DIR 10
+  #define RIGHT_MOTOR_DIR 11
   #define LEFT_MOTOR_DIR 9
 #endif
 
