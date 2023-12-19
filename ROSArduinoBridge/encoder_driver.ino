@@ -69,6 +69,19 @@
     }
   }
 #elif defined(USE_MD_REncoder_LIB)
+  void INT_left() {
+    leftMotorEncoder.read();
+  }
+
+  void INT_right() {
+    rightMotorEncoder.read();
+  }
+  void setInterrupts() {
+    attachInterrupt(digitalPinToInterrupt(LEFT_ENC_PIN_A), INT_left, CHANGE);
+    attachInterrupt(digitalPinToInterrupt(LEFT_ENC_PIN_B), INT_left, CHANGE);
+    attachInterrupt(digitalPinToInterrupt(RIGHT_ENC_PIN_A), INT_right, CHANGE);
+    attachInterrupt(digitalPinToInterrupt(RIGHT_ENC_PIN_B), INT_right, CHANGE);
+  }
   /* Wrap the encoder reading function */
   long readEncoder(int i) {
     if (i == LEFT) return leftMotorEncoder.getCount();

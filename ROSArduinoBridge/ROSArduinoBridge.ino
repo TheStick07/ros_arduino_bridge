@@ -262,6 +262,7 @@ int runCommand() {
   }
 }
 
+
 /* Setup function--runs once at startup. */
 void setup() {
   Serial.begin(BAUDRATE);
@@ -289,6 +290,7 @@ void setup() {
     // enable PCINT1 and PCINT2 interrupt in the general interrupt mask
     PCICR |= (1 << PCIE1) | (1 << PCIE2);
   #elif defined(USE_MD_REncoder_LIB)
+    setInterrupts();
     // set up encoder object
     leftMotorEncoder.begin();
     rightMotorEncoder.begin();
@@ -358,6 +360,8 @@ void loop() {
 #ifdef USE_BASE
   if (millis() > nextPID) {
     updatePID();
+    leftMotorEncoder.resetCount();
+    rightMotorEncoder.resetCount();
     nextPID += PID_INTERVAL;
   }
   

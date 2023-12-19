@@ -93,8 +93,7 @@ void MD_REncoder::begin(void)
   pinMode(_pinA, (ENABLE_PULLUPS ? INPUT_PULLUP : INPUT));
   pinMode(_pinB, (ENABLE_PULLUPS ? INPUT_PULLUP : INPUT));
 
-  attachInterrupt(digitalPinToInterrupt(_pinA), read, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(_pinB), read, CHANGE);
+  
 }
 
 #if ENABLE_ROTATION_COUNT
