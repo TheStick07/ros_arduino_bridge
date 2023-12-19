@@ -360,8 +360,6 @@ void loop() {
 #ifdef USE_BASE
   if (millis() > nextPID) {
     updatePID();
-    leftMotorEncoder.resetCount();
-    rightMotorEncoder.resetCount();
     nextPID += PID_INTERVAL;
   }
   

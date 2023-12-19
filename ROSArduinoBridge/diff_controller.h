@@ -35,7 +35,7 @@ SetPointInfo leftPID, rightPID;
 /* PID Parameters */
 int Kp = 20;
 int Kd = 12;
-int Ki = 0;
+float Ki = 0.5;
 int Ko = 50;
 
 unsigned char moving = 0; // is the base in motion?
@@ -73,6 +73,12 @@ void doPID(SetPointInfo * p) {
   //Perror = p->TargetTicksPerFrame - (p->Encoder - p->PrevEnc);
   input = p->Encoder - p->PrevEnc;
   Perror = p->TargetTicksPerFrame - input;
+/*   Serial.print(input);
+  Serial.print(" ");
+  Serial.print(p->TargetTicksPerFrame);
+  Serial.print(" ");
+  Serial.print(Perror);
+  Serial.print(" "); */
 
 
   /*
@@ -84,22 +90,22 @@ void doPID(SetPointInfo * p) {
   // p->PrevErr = Perror;
   output = (Kp * Perror - Kd * (input - p->PrevInput) + p->ITerm) / Ko;
   p->PrevEnc = p->Encoder;
-
   output += p->output;
   // Accumulate Integral error *or* Limit output.
   // Stop accumulating when output saturates
-  if (output >= MAX_PWM)
+  if (output >= MAX_PWM) {
     output = MAX_PWM;
-  else if (output <= -MAX_PWM)
+  } else if (output <= -MAX_PWM) {
     output = -MAX_PWM;
-  else
-  /*
-  * allow turning changes, see http://brettbeauregard.com/blog/2011/04/improving-the-beginner%E2%80%99s-pid-tuning-changes/
-  */
-    p->ITerm += Ki * Perror;
-
-  p->output = output;
-  p->PrevInput = input;
+  } else {
+    /*
+    * allow turning changes, see http://brettbeauregard.com/blog/2011/04/improving-the-beginner%E2%80%99s-pid-tuning-changes/
+    */
+      p->ITerm += Ki * Perror;
+  }
+    p->output = output;
+    p->PrevInput = input;
+ 
 }
 
 /* Read the encoder values and call the PID routine */
@@ -121,9 +127,12 @@ void updatePID() {
   }
 
   /* Compute PID update for each motor */
-  doPID(&rightPID);
   doPID(&leftPID);
-
+  doPID(&rightPID);
+/*   Serial.println();
+  Serial.print(leftPID.output);
+  Serial.print(" ");
+  Serial.println(leftPID.Encoder); */
   /* Set the motor speeds accordingly */
   setMotorSpeeds(leftPID.output, rightPID.output);
 }
