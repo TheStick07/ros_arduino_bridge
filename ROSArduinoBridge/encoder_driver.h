@@ -29,8 +29,8 @@
   #define RIGHT_ENC_PIN_A 7  //pin 7
   #define RIGHT_ENC_PIN_B 8  //pin 8
 
-  #define TOOL_ENC_PIN_A 11  //pin 11
-  #define TOOL_ENC_PIN_B 12  //pin 12
+  #define TOOL_ENC_PIN_A 12  //pin 11
+  #define TOOL_ENC_PIN_B 13  //pin 12
 
   void setInterrupts();
 

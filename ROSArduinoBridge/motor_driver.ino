@@ -6,6 +6,8 @@
    #define near the top of the main ROSArduinoBridge.ino file.
    
    *************************************************************/
+#include "motor_driver.h"
+
 
 #ifdef USE_BASE
    
@@ -89,6 +91,14 @@
 #elif defined CYTRON_MOTOR_DRIVER
   #warning CYTRON_MOTOR_DRIVER used!
   void initMotorController(){
+    pinMode(LEFT_MOTOR, OUTPUT);
+    pinMode(RIGHT_MOTOR, OUTPUT);
+    pinMode(TOOL_MOTOR, OUTPUT);
+
+    pinMode(LEFT_MOTOR_DIR, OUTPUT);
+    pinMode(RIGHT_MOTOR_DIR, OUTPUT);
+    pinMode(TOOL_MOTOR_DIR, OUTPUT);
+
     digitalWrite(TOOL_MOTOR, LOW);
     digitalWrite(RIGHT_MOTOR, LOW);
     digitalWrite(LEFT_MOTOR, LOW);
@@ -110,8 +120,8 @@
       else if (reverse == 1) { analogWrite(LEFT_MOTOR, spd); digitalWrite(LEFT_MOTOR_DIR, HIGH); }
     }
     else /*if (i == RIGHT) //no need for condition*/ {
-      if      (reverse == 0) { analogWrite(RIGHT_MOTOR, spd); digitalWrite(RIGHT_MOTOR, LOW); }
-      else if (reverse == 1) { analogWrite(RIGHT_MOTOR, spd); digitalWrite(RIGHT_MOTOR, HIGH); }
+      if      (reverse == 0) { analogWrite(RIGHT_MOTOR, spd); digitalWrite(RIGHT_MOTOR_DIR, LOW); }
+      else if (reverse == 1) { analogWrite(RIGHT_MOTOR, spd); digitalWrite(RIGHT_MOTOR_DIR, HIGH); }
     }
   }
 

@@ -152,7 +152,7 @@ long arg2;
 #ifdef USE_MD_REncoder_LIB
   // set up encoder object
   MD_REncoder leftMotorEncoder = MD_REncoder(LEFT_ENC_PIN_A, LEFT_ENC_PIN_B);
-  MD_REncoder rightMotorEncoder = MD_REncoder(RIGHT_ENC_PIN_A, RIGHT_ENC_PIN_B);
+  MD_REncoder rightMotorEncoder = MD_REncoder(RIGHT_ENC_PIN_B, RIGHT_ENC_PIN_A);
 #endif
 
 /* Clear the current command parameters */

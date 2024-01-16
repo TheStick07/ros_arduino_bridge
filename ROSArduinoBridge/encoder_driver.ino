@@ -6,7 +6,7 @@
    #define near the top of the main ROSArduinoBridge.ino file.
    
    ************************************************************ */
-   
+
 #ifdef USE_BASE
 
 #ifdef ROBOGAIA
